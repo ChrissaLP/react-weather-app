@@ -55,8 +55,8 @@ export default class WeatherApp extends React.Component {
             parsedData.push({
                 datetime: datapoint.datetime,
                 temp: datapoint.temp,
-                min_temp: datapoint.min_temp,
-                max_temp: datapoint.max_temp,
+                min_temp: Math.round(datapoint.min_temp * (9/5) + 32),
+                max_temp: Math.round(datapoint.max_temp * (9/5) + 32),
                 description: datapoint.weather.description,
                 iconCode: datapoint.weather.code
             });
@@ -92,6 +92,8 @@ export default class WeatherApp extends React.Component {
                     iconCode = {weather.iconCode}
                     num = {this.randomNum()}
                     description = {weather.description}
+                    min_temp = {weather.min_temp}
+                    max_temp = {weather.max_temp}
                 />
                 ))
                     

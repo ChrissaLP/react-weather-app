@@ -9,10 +9,16 @@ class Card extends React.Component {
     }
     
     render() {
-
-    const SUN_ICON = '../../public/images/sun.png';
-    const RAIN_ICON = '../../public/images/rain.png';
-    const SNOW_ICON = '../../public/images/snow.png';
+    
+    const STORM_ICON = '../../public/images/200thunderstorm.png';
+    const RAIN_ICON = '../../public/images/300rain.png';
+    const SNOW_ICON = '../../public/images/600snow.png';
+    const FOG_ICON = '../../public/images/700fog.png';
+    const SUN_ICON = '../../public/images/800clear.png';
+    const FEW_CLOUDS_ICON = '../../public/images/801fewclouds.png';
+    const MANY_CLOUDS_ICON = '../../public/images/802clouds.png';
+    const UNKNOWN = '../../public/images/900unknown.png';
+    
     let image = '';
     let altText = '';
     if (this.props.num === 0) {
@@ -34,6 +40,7 @@ class Card extends React.Component {
         <div className="card">
             <p>Day {this.props.count}: {this.props.date}</p>
             <p>{this.props.description}</p>
+            <p>{this.props.min_temp}&deg;/ {this.props.max_temp}&deg;</p>
             <Weather weatherOptions={this.props.num} />
             {/*<p>Number: {this.props.num}</p>*/}
 
