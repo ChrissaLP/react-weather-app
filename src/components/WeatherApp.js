@@ -5,7 +5,7 @@ import HandleWeatherData from './HandleWeatherData';
 
 export default class WeatherApp extends React.Component {
     state = {
-            days: ['a'],
+            location: {},
             weatherData: []
     };
     randomNum = () => {
@@ -26,7 +26,9 @@ export default class WeatherApp extends React.Component {
                     const weatherData = JSON.parse(JSON.stringify(result));
                     console.log(typeof(weatherData));
                     try {
-                        this.setState({ weatherData: this.parseWeather(weatherData) });
+                        this.setState({ 
+                            weatherData: this.parseWeather(weatherData),
+                            location: this.parseLocation(weatherData) });
                     }
                     catch(e) {
                         console.log(e);
@@ -41,24 +43,48 @@ export default class WeatherApp extends React.Component {
     componentDidMount() {
         this.fetchWeather('19355', '767d944c186f4165b5d8dde168ee3323');
     }   
+    parseLocation = (data) => {
+        let city = data.city_name;
+        let country = data.country_code;
+        let state = data.state_code;
+        let location = {
+            city: '',
+            country: '',
+            state: ''
+        };
+        if (city) {
+            location.city = city;
+        }
+        if (country) {
+            location.country = country;
+        }
+        if (state) {
+            location.state = state;
+        }
+        return location;
+    }
     parseWeather = (data) => {
-        let weatherData = data.data;
-        console.log(weatherData);
+        console.log(data);
+        
+        
         if (!data || !data.data) {
             return [];
         }
+        
+        let weatherData = data.data;
+        console.log(weatherData);
 
         let parsedData = [];
-        // starting with 5 days of data
-        for (let i = 0; i < 5; i++ ) {
+        // starting with 7 days of data
+        for (let i = 0; i < 7; i++ ) {
             let datapoint = weatherData[i];
             parsedData.push({
-                datetime: datapoint.datetime,
+                date: datapoint.valid_date,
                 temp: datapoint.temp,
                 min_temp: Math.round(datapoint.min_temp * (9/5) + 32),
                 max_temp: Math.round(datapoint.max_temp * (9/5) + 32),
                 description: datapoint.weather.description,
-                iconCode: datapoint.weather.code
+                iconCode: datapoint.weather.code, 
             });
         }
         console.log(parsedData);
@@ -83,17 +109,22 @@ export default class WeatherApp extends React.Component {
 
         return (
             <div>
+            <h2>Weather forecast for: </h2>
+                <h3>{this.state.location.city}{this.state.location.state && <span>, {this.state.location.state}</span>}
+                </h3>
+                <h3>{!this.state.location.state && <span>{this.state.location.country}</span>}</h3>
             {
-                this.state.weatherData.map((weather, index) => (
+                
+                this.state.weatherData.map((data, index) => (
                 <Card 
-                    date = {weather.datetime}
+                    date={data.date}
                     key = {index} 
                     count = {index+1}
-                    iconCode = {weather.iconCode}
+                    iconCode={data.iconCode}
                     num = {this.randomNum()}
-                    description = {weather.description}
-                    min_temp = {weather.min_temp}
-                    max_temp = {weather.max_temp}
+                    description={data.description}
+                    min_temp={data.min_temp}
+                    max_temp={data.max_temp}
                 />
                 ))
                     

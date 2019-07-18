@@ -1,6 +1,5 @@
 import React from 'react';
-
-export default class Date extends React.Component {
+class Date extends React.Component {
     
     determineDate() {
         let today = new Date();
