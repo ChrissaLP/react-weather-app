@@ -12,6 +12,13 @@ export default class WeatherApp extends React.Component {
         let num = Math.floor((Math.random() * 3));
         return num;
     }
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const zipcode = e.target.elements.zipcode.value;
+        console.log(e.target.elements.zipcode.value);
+
+        this.fetchWeather(zipcode, '767d944c186f4165b5d8dde168ee3323');
+    }
     
     fetchWeather = (zip, apiKey) => {
         // can see if need this checking later
@@ -41,7 +48,7 @@ export default class WeatherApp extends React.Component {
         //console.log('https://api.openweathermap.org/data/2.5/forecast?postal_code=' + zip + '&key=' + apiKey);
     };
     componentDidMount() {
-        this.fetchWeather('19355', '767d944c186f4165b5d8dde168ee3323');
+        //this.fetchWeather('19355', '767d944c186f4165b5d8dde168ee3323');
     }   
     parseLocation = (data) => {
         let city = data.city_name;
@@ -109,6 +116,11 @@ export default class WeatherApp extends React.Component {
 
         return (
             <div>
+            <h2>Enter a zipcode:</h2>
+                <form className="zipcode" onSubmit={this.handleSubmit}>
+                    <input className="add-zipcode__input" type="text" name="zipcode" />
+                    <button className="button">Add Option</button>
+                </form>
             <h2>Weather forecast for: </h2>
                 <h3>{this.state.location.city}{this.state.location.state && <span>, {this.state.location.state}</span>}
                 </h3>
