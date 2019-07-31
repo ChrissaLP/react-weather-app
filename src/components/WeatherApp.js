@@ -15,10 +15,20 @@ export default class WeatherApp extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const zipcode = e.target.elements.zipcode.value;
-        console.log(e.target.elements.zipcode.value);
+        //console.log(e.target.elements.zipcode.value);
 
         this.fetchWeather(zipcode, '767d944c186f4165b5d8dde168ee3323');
     }
+    handleSubmitCity = (e) => {
+        e.preventDefault();
+        let city = e.target.elements.city.value;
+        city = city.replace(/\s+/g, '');
+        // need to fix regex so that space in city name like New York NY is replaced by _
+        // then space after comma replaced by no space
+        console.log(city);
+        this.fetchWeatherByCity(city, '767d944c186f4165b5d8dde168ee3323');
+    }
+
     
     fetchWeather = (zip, apiKey) => {
         // can see if need this checking later
@@ -38,6 +48,35 @@ export default class WeatherApp extends React.Component {
                             location: this.parseLocation(weatherData) });
                     }
                     catch(e) {
+                        console.log(e);
+                    }
+                    // setState({ posts: result.data.children, lastPostName: result.data.children[result.data.children.length - 1].data.name });
+
+                    //console.log(that.state.posts);
+                });
+        }
+        //console.log('https://api.openweathermap.org/data/2.5/forecast?postal_code=' + zip + '&key=' + apiKey);
+    };
+
+    fetchWeatherByCity = (city, apiKey) => {
+        // can see if need this checking later
+        if (city) {
+            fetch('https://api.weatherbit.io/v2.0/forecast/daily?city=' + city + '&country=US&key=' + apiKey).then(
+                (response) => {
+                    return response.json();
+
+                }).then((result) => {
+                    // so I remember - stringify turns result into string
+                    // parse turns it into object!
+                    const weatherData = JSON.parse(JSON.stringify(result));
+                    console.log(typeof (weatherData));
+                    try {
+                        this.setState({
+                            weatherData: this.parseWeather(weatherData),
+                            location: this.parseLocation(weatherData)
+                        });
+                    }
+                    catch (e) {
                         console.log(e);
                     }
                     // setState({ posts: result.data.children, lastPostName: result.data.children[result.data.children.length - 1].data.name });
@@ -119,7 +158,12 @@ export default class WeatherApp extends React.Component {
             <h2>Enter a zipcode:</h2>
                 <form className="zipcode" onSubmit={this.handleSubmit}>
                     <input className="add-zipcode__input" type="text" name="zipcode" />
-                    <button className="button">Add Option</button>
+                    <button className="button">Get Weather</button>
+                </form>
+            <h2>Or search by city, state:</h2>
+                <form className="city" onSubmit={this.handleSubmitCity}>
+                    <input className="add-city__input" type="text" name="city" />
+                    <button className="button">Get Weather</button>
                 </form>
             <h2>Weather forecast for: </h2>
                 <h3>{this.state.location.city}{this.state.location.state && <span>, {this.state.location.state}</span>}
