@@ -21,11 +21,15 @@ export default class WeatherApp extends React.Component {
     }
     handleSubmitCity = (e) => {
         e.preventDefault();
-        let city = e.target.elements.city.value;
-        city = city.replace(/\s+/g, '');
-        // need to fix regex so that space in city name like New York NY is replaced by _
-        // then space after comma replaced by no space
-        console.log(city);
+        // need to add error handling if no value submitted or if bad value submitted
+        let location = e.target.elements.city.value;
+        location = location.split(',');
+        let city = location[0].replace(/\s+/g, '_');
+        let state = '';
+        if (location[1]) {
+            state = location[1].replace(/\s+/g, '');
+        }
+        city = city + ',' + state;
         this.fetchWeatherByCity(city, '767d944c186f4165b5d8dde168ee3323');
     }
 
