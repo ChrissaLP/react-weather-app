@@ -1,0 +1,30 @@
+// image style
+
+.header {
+  color: red;
+  text-shadow: 2px 2px 5px yellow;
+  font-size: 2.5rem;
+  background: url("../../public/images/blue-bright-clouds.jpg") no-repeat;
+  background-size: contain;
+  max-width: 43.5rem;
+  min-height: 100px;
+  max-height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header__img {
+    width: 100%;
+    display: block;
+    transform: scaleX(-1);
+}
+
+.header__title
+ {
+  padding-top: 1rem;
+}
+
+.header__subtitle {
+  margin: 0;
+  padding-left: 0.75rem;
+}

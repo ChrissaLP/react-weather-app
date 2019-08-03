@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './Card';
+import Header from './Header';
 import FetchWeather from './FetchWeather';
 import HandleWeatherData from './HandleWeatherData';
 
@@ -91,7 +92,7 @@ export default class WeatherApp extends React.Component {
         //console.log('https://api.openweathermap.org/data/2.5/forecast?postal_code=' + zip + '&key=' + apiKey);
     };
     componentDidMount() {
-        //this.fetchWeather('19355', '767d944c186f4165b5d8dde168ee3323');
+        this.fetchWeather('19107', '767d944c186f4165b5d8dde168ee3323');
     }   
     parseLocation = (data) => {
         let city = data.city_name;
@@ -159,16 +160,8 @@ export default class WeatherApp extends React.Component {
 
         return (
             <div>
-            <h2>Enter a zipcode:</h2>
-                <form className="zipcode" onSubmit={this.handleSubmit}>
-                    <input className="add-zipcode__input" type="text" name="zipcode" />
-                    <button className="button">Get Weather</button>
-                </form>
-            <h2>Or search by city, state:</h2>
-                <form className="city" onSubmit={this.handleSubmitCity}>
-                    <input className="add-city__input" type="text" name="city" />
-                    <button className="button">Get Weather</button>
-                </form>
+                <Header />
+          
             <h2>Weather forecast for: </h2>
                 <h3>{this.state.location.city}{this.state.location.state && <span>, {this.state.location.state}</span>}
                 </h3>
@@ -189,7 +182,20 @@ export default class WeatherApp extends React.Component {
                 ))
                     
             }
-                <div className="container">
+            <div className="form__container">
+                
+                <form className="form__zipcode" onSubmit={this.handleSubmit}>
+                        <legend>Enter a zipcode:</legend>
+                    <input className="add-zipcode__input" type="text" name="zipcode" />
+                    <button className="button">Get Weather</button>
+                </form>
+                <form className="form__city" onSubmit={this.handleSubmitCity}>
+                <legend>Or search by city, state:</legend>
+                    <input className="add-city__input" type="text" name="city" />
+                    <button className="button">Get Weather</button>
+                </form>
+                </div>
+                <div className="creditContainer">
                 {/* <FetchWeather /> */} 
                
                 

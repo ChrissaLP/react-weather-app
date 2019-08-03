@@ -7,6 +7,31 @@
 }
 
 /* probably need to remove this but for temporary purposes */
-.container {
+.creditContainer {
   clear: both;
+}
+
+.form__container {
+  clear: both;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+
+.form__zipcode
+{
+  display: flex;
+  flex-flow: column;
+  padding-left: 0.5rem;
+  padding-right: 1rem;
+}
+
+.form__city {
+  display: flex;
+  flex-flow: column;
+}
+
+.button {
+  margin-top: 0.5rem;
 }
