@@ -18,7 +18,7 @@ export default class WeatherApp extends React.Component {
         const zipcode = e.target.elements.zipcode.value;
         //console.log(e.target.elements.zipcode.value);
 
-        this.fetchWeather(zipcode, '767d944c186f4165b5d8dde168ee3323');
+        this.fetchWeather(zipcode, process.env.API_KEY);
     }
     handleSubmitCity = (e) => {
         e.preventDefault();
@@ -31,7 +31,7 @@ export default class WeatherApp extends React.Component {
             state = location[1].replace(/\s+/g, '');
         }
         city = city + ',' + state;
-        this.fetchWeatherByCity(city, '767d944c186f4165b5d8dde168ee3323');
+        this.fetchWeatherByCity(city, process.env.API_KEY);
     }
 
     
@@ -92,7 +92,7 @@ export default class WeatherApp extends React.Component {
         //console.log('https://api.openweathermap.org/data/2.5/forecast?postal_code=' + zip + '&key=' + apiKey);
     };
     componentDidMount() {
-        this.fetchWeather('19107', '767d944c186f4165b5d8dde168ee3323');
+        this.fetchWeather('19107', process.env.API_KEY);
     }   
     parseLocation = (data) => {
         let city = data.city_name;
@@ -152,6 +152,7 @@ export default class WeatherApp extends React.Component {
         //console.log(startDay);
         //makes sense to do this with state???
         newDays.push('Today');
+        console.log(process.env.API_KEY);
         
         for (let i = startDay + 1; i !== startDay; i = (i + 1) % daysOfWeek.length) {
             newDays.push(daysOfWeek[i]);
