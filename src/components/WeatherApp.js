@@ -152,7 +152,6 @@ export default class WeatherApp extends React.Component {
         //console.log(startDay);
         //makes sense to do this with state???
         newDays.push('Today');
-        console.log(process.env.API_KEY);
         
         for (let i = startDay + 1; i !== startDay; i = (i + 1) % daysOfWeek.length) {
             newDays.push(daysOfWeek[i]);
@@ -184,7 +183,7 @@ export default class WeatherApp extends React.Component {
                     
             }
             <div className="form__container">
-                
+                {/* to do , limit to just one button!*/}
                 <form className="form__zipcode" onSubmit={this.handleSubmit}>
                         <legend>Enter a zipcode:</legend>
                     <input className="add-zipcode__input" type="text" name="zipcode" />
@@ -200,7 +199,9 @@ export default class WeatherApp extends React.Component {
                 {/* <FetchWeather /> */} 
                
                 
-                <p className="text__credit">Thanks to <a href="https://icons8.com/">icons8</a> for the icons.</p>
+                    <p className="text__credit">Thanks to <a href="https://icons8.com/">icons8</a> for the icons 
+                    and <a href="https://www.pexels.com/@skitterphoto?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">
+                            Photo by Skitterphoto</a> from Pexels for the photo.</p>
                    
                     {/*  <HandleWeatherData weatherData={this.state.weatherData} /> */}
                 </div>
