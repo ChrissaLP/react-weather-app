@@ -20,11 +20,34 @@ export default class WeatherApp extends React.Component {
 
         this.fetchWeather(zipcode, process.env.API_KEY);
     }
-    handleSubmitCity = (e) => {
+    handleSubmitComplete = (e) => {
         e.preventDefault();
-        // need to add error handling if no value submitted or if bad value submitted
-        let location = e.target.elements.city.value;
-        location = location.split(',');
+        const data = e.target.elements.data.value;
+        console.log(data);
+
+          // match [0-9]{5} for zip
+         // or match [\d]{5} for zipcode
+         // match [A-Za-z]+ for city/state  [A-Za-z]+\,?[A-Za-z]+
+        if (data.match(/^[\d]{5}$/)) {
+            this.fetchWeather(data, process.env.API_KEY);
+        }
+        else if (data.match(/[A-Za-z]+/)) {
+            this.handlecityData(data);
+        }
+        else {
+            // need to handle error handling, do further checks on bad format
+            const error = 'Please enter in format....';
+        }
+        
+    }
+    handlecityData(data) {
+        let location = data;
+        if (location.includes(',')) {
+            location = location.split(',');
+        }
+        else {
+            location = location.split(' ');
+        }
         let city = location[0].replace(/\s+/g, '_');
         let state = '';
         if (location[1]) {
@@ -33,7 +56,7 @@ export default class WeatherApp extends React.Component {
         city = city + ',' + state;
         this.fetchWeatherByCity(city, process.env.API_KEY);
     }
-
+  
     
     fetchWeather = (zip, apiKey) => {
         // can see if need this checking later
@@ -183,16 +206,10 @@ export default class WeatherApp extends React.Component {
                     
             }
             <div className="form__container">
-                {/* to do , limit to just one button!*/}
-                <form className="form__zipcode" onSubmit={this.handleSubmit}>
-                        <legend>Enter a zipcode:</legend>
-                    <input className="add-zipcode__input" type="text" name="zipcode" />
-                    <button className="button">Get Weather</button>
-                </form>
-                <form className="form__city" onSubmit={this.handleSubmitCity}>
-                <legend>Or search by city, state:</legend>
-                    <input className="add-city__input" type="text" name="city" />
-                    <button className="button">Get Weather</button>
+                <form className="form__complete" onSubmit={this.handleSubmitComplete}>
+                        <legend>Search by zip or by city, state:</legend>
+                        <input className="form__input" type="text" name="data" />
+                        <button className="button">Get Weather</button>
                 </form>
                 </div>
                 <div className="creditContainer">
