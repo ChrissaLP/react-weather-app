@@ -1,7 +1,5 @@
 import React from 'react';
 
-import headerImg from '../../public/images/blue-bright-clouds.jpg';
-
 export default class Header extends React.Component {
     constructor(props) {
         super(props);

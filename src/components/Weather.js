@@ -1,7 +1,4 @@
 import React from 'react';
-
-import FetchWeather from './FetchWeather';
-
 import STORM_ICON  from  '../../public/images/200thunderstorm.png';
 import RAIN_ICON from  '../../public/images/300rain.png';
 import  SNOW_ICON from '../../public/images/600snow.png';
@@ -10,6 +7,8 @@ import SUN_ICON from '../../public/images/800clear.png';
 import FEW_CLOUDS_ICON from '../../public/images/801fewclouds.png';
 import MANY_CLOUDS_ICON from '../../public/images/802clouds.png';
 import UNKNOWN_ICON from '../../public/images/900unknown.png';
+
+// TO DO determine if can use this instead of in Card... or delete entirely
 
 export default class Weather extends React.Component {
     constructor(props) {
@@ -62,30 +61,12 @@ export default class Weather extends React.Component {
     };
     
     render() {
-       {/*  
-        let image = '';
-        let alttext='';
-        if (this.props.weatherOptions===0) {
-            image = SUN_ICON;
-            alttext = 'sun';
-        }
-        else if (this.props.weatherOptions===1) {
-            image = RAIN_ICON;
-            alttext='rain';
-        }
-        else {
-            image = SNOW_ICON;
-            alttext='snow';
-        }
-        */}
-
         let image = this.getImage();
         console.log(this.props.iconCode);
         return (
             <div>
                 <img className="weather-img" src={image.source} alt="{image.alt}" />
                 <p className="weather-text">{image.alt}</p>
-                { /* <FetchWeather /> */ }
             </div>
         );
     }

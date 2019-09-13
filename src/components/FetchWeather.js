@@ -1,5 +1,7 @@
 import React from 'react';
 
+// TO DO: delete class
+
 export default class FetchWeather extends React.Component {
 
     state = {

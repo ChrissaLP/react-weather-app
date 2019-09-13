@@ -62,7 +62,6 @@ class Card extends React.Component {
     
         let image = this.getImage(); 
         let dateInfo = new Date(this.props.date);
-        console.log(dateInfo);
         let daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug','Sep','Oct','Nov','Dec'];
         let day = daysOfWeek[dateInfo.getUTCDay()];
@@ -75,8 +74,6 @@ class Card extends React.Component {
             <p>{this.props.description}</p>
             <p>{this.props.max_temp}&deg; / {this.props.min_temp}&deg;</p>
             <img className="weather-img" src={image.source} alt="{image.alt}" />
-            {/*<p className="weather-text">{image.alt}</p>*/}
-            {/*<p>Number: {this.props.num}</p>*/}
 
         </div>
     );

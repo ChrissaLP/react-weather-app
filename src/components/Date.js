@@ -1,4 +1,7 @@
 import React from 'react';
+
+// TO DO eliminate this class or make use of it
+
 class Date extends React.Component {
     
     determineDate() {
