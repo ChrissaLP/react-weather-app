@@ -7,3 +7,4 @@ yarn-error.log*
 .env
 
 bundle.js
+/src/playground
