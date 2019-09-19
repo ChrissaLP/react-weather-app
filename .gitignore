@@ -7,4 +7,9 @@ yarn-error.log*
 .env
 
 /public/bundle.js
+/public/bundle.js.map
+/public/styles.css
+/public/styles.css.map
+/public/*.png
+/public/*.jpg
 /src/playground
