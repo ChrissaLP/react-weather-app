@@ -6,5 +6,5 @@ yarn-error.log*
 
 .env
 
-bundle.js
+/public/bundle.js
 /src/playground
