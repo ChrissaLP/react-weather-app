@@ -1,0 +1,39 @@
+// image style
+
+.header {
+ /* color: #335DFF;*/
+  color: #ECFF00;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px #4A5076;
+  font-size: 2.5rem;
+ 
+  /*margin-left: auto;
+  margin-right: auto;*/
+  display: flex;
+ justify-content: center;
+}
+
+.header--container {
+  display: flex;
+  flex-flow: row wrap;
+  background: url("../../public/images/blue-bright-clouds.jpg") no-repeat;
+  background-size: contain;
+   max-width: 43.25rem;
+  min-height: 100px;
+  max-height: 100px;
+  justify-content: center;
+  align-content: flex-start;
+}
+
+.header__title
+ {
+  margin: 0;
+  min-height: 0;
+  padding-top: 1rem;
+}
+
+.header__subtitle {
+  margin: 0;
+  min-height: 0;
+
+}
