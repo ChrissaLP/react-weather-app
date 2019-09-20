@@ -13,3 +13,5 @@ yarn-error.log*
 /public/*.png
 /public/*.jpg
 /src/playground
+
+webpack.prod.js // may just delete this

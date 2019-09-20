@@ -14,6 +14,13 @@ module.exports = (env) => {
             filename: 'bundle.js'
         },
         plugins: [
+            isProduction ? 
+                new webpack.DefinePlugin({
+                    'process.env': {
+                        'API_KEY': JSON.stringify(process.env.API_KEY)
+                    }
+                })
+            :
             new Dotenv(), 
             CSSExtract
         ],
