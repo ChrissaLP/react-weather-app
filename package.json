@@ -38,5 +38,9 @@
     "live-server": "^1.2.1",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "3.8.1"
+  },
+  "engines": {
+    "node": "10.16.0",
+    "npm": "6.9.0"
   }
 }
