@@ -1,20 +1,24 @@
 //entry -> output
 const path = require('path');
-const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = (env) => {
-    const isProduction = env === 'production';
     const CSSExtract = new ExtractTextPlugin('styles.css');
 
     return { 
         entry: './src/app.js',
+        mode: 'production',
         output: {
             path: path.join(__dirname, 'public'),
             filename: 'bundle.js'
         },
         plugins: [
-            new Dotenv(), 
+            new webpack.DefinePlugin({
+                'process.env': {
+                    'API_KEY': JSON.stringify(env.API_KEY) 
+                }
+            }), 
             CSSExtract
         ],
         module: {
@@ -53,7 +57,7 @@ module.exports = (env) => {
                 ]
             }]
         },
-        devtool: isProduction ? 'source-map' : 'inline-source-map',
+        devtool: 'source-map',
         devServer: {
             contentBase: path.join(__dirname, 'public')
         }
