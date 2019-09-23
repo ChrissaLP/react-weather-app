@@ -6,6 +6,9 @@ body {
     font-family: Helvetica, Arial, sans-serif;
     font-size: $m-size;
     padding-left: .75rem;
+    width: 97%;
+    margin-left: auto;
+    margin-right: auto
 }
 
 button {
@@ -14,4 +17,37 @@ button {
 
 button:disabled {
     cursor: default;
+}
+
+footer {
+    clear: both;
+    border-top: 1px solid black;
+    margin-top: $s-size;
+}
+
+.header__credit {
+    margin: 0;
+}
+
+.text__credit {
+  clear: both;
+  display: block;
+  font-weight: normal;
+  font-size: smaller;
+  padding: .5em 0 0 .5em;
+}
+
+a:link, 
+a:visited,
+a:active {
+    text-decoration: none;
+    color: #6699cc;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    margin-top: $s-size;
+    padding-left: $m-size;
 }

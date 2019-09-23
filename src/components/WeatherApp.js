@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './Card';
+import Footer from './Footer';
 import Header from './Header';
 
 export default class WeatherApp extends React.Component {
@@ -8,20 +9,13 @@ export default class WeatherApp extends React.Component {
             weatherData: [], 
             error: ''
     };
-    // TO DO: remove
-    randomNum = () => {
-        let num = Math.floor((Math.random() * 3));
-        return num;
-    };
 
     handleSubmit = (e) => {
         e.preventDefault();
         const data = e.target.elements.data.value;
-        console.log(data);
-        
+        e.target.elements.data.value = '';
         if (data.match(/^[\d]{5}$/)) {
             this.fetchWeatherByZip(data, process.env.API_KEY);
-            // this.fetchWeatherByZip()
         }
         else if (data.match(/[A-Za-z]+/)) {
             let location = data;
@@ -40,7 +34,6 @@ export default class WeatherApp extends React.Component {
             this.fetchWeatherByCity(city, process.env.API_KEY);
         }
         else {
-            // need to handle error handling, do further checks on bad format
             const error = "Incorrect format. Please enter either a 5 digit zip or city, state.";
             this.setState({ error });
         }
@@ -79,23 +72,35 @@ export default class WeatherApp extends React.Component {
             this.setState({ error: ''});
             fetch('https://api.weatherbit.io/v2.0/forecast/daily?city=' + city + '&country=US&key=' + apiKey).then(
                 (response) => {
-                    return response.json();
-
-                }).then((result) => {
-                    // so I remember - stringify turns result into string
-                    // parse turns it into object!
-                    const weatherData = JSON.parse(JSON.stringify(result));
-                    console.log(typeof (weatherData));
-                    try {
+                    if (response.status === 404 || response.status === 200) {
+                        console.log(response);
+                        return response.json();
+                    }
+                    else {  
+                        const error = `Error processing your request. Please re-enter data, 
+                                since no weather information found.`
                         this.setState({
-                            weatherData: this.parseWeather(weatherData),
-                            location: this.parseLocation(weatherData)
+                            error
                         });
                     }
-                    catch (e) {
-                        console.log(e);
+                }).then((result) => {
+                    if (!this.state.error) {
+                        const weatherData = JSON.parse(JSON.stringify(result));
+                        try {
+                            this.setState({
+                                weatherData: this.parseWeather(weatherData),
+                                location: this.parseLocation(weatherData),
+                                error: ''
+                            });
+                        }
+                        catch (e) {
+                            this.setState({ error: e });
+                        }
                     }
                    
+                }).catch((e) => {
+                    console.log(e);
+                    this.setState({error: e});
                 });
         }
         
@@ -132,7 +137,6 @@ export default class WeatherApp extends React.Component {
         }
         
         let weatherData = data.data;
-        
         let parsedData = [];
         // starting with 7 days of data
         for (let i = 0; i < 7; i++ ) {
@@ -169,7 +173,6 @@ export default class WeatherApp extends React.Component {
                     key = {index} 
                     count = {index+1}
                     iconCode={data.iconCode}
-                    num = {this.randomNum()}
                     description={data.description}
                     min_temp={data.min_temp}
                     max_temp={data.max_temp}
@@ -184,14 +187,7 @@ export default class WeatherApp extends React.Component {
                         <button className="button">Get Weather</button>
                 </form>
                 </div>
-                <div className="creditContainer">
-               
-                
-                    <p className="text__credit">Thanks to <a href="https://icons8.com/">icons8</a> for the icons 
-                    and <a href="https://www.pexels.com/@skitterphoto?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">
-                            Photo by Skitterphoto</a> from Pexels for the photo.</p>
-                   
-                </div>
+              <Footer />
             </div>
         );
     }

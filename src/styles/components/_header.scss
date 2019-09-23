@@ -1,24 +1,21 @@
-// image style
 
-.header {
- /* color: #335DFF;*/
+header {
+  background: url("../../public/images/blue-bright-clouds.jpg") no-repeat;
+  background-size: cover;
+  border-radius: 5px;
   color: #ECFF00;
   font-weight: bold;
   text-shadow: 1px 1px 3px #4A5076;
   font-size: 2.5rem;
- 
-  /*margin-left: auto;
-  margin-right: auto;*/
   display: flex;
- justify-content: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .header--container {
   display: flex;
   flex-flow: row wrap;
-  background: url("../../public/images/blue-bright-clouds.jpg") no-repeat;
-  background-size: contain;
-   max-width: 43.25rem;
+  max-width: 43.25rem;
   min-height: 100px;
   max-height: 100px;
   justify-content: center;

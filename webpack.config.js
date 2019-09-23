@@ -3,7 +3,7 @@ const path = require('path');
 const Dotenv = require('dotenv-webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-module.exports = (env) => {
+module.exports = () => {
     const CSSExtract = new ExtractTextPlugin('styles.css');
 
     return { 
@@ -41,7 +41,6 @@ module.exports = (env) => {
                     ]
                 })
             },
-        
             {
                 test: /\.(png|jpe?g|gif)$/,
                 use: [
@@ -56,5 +55,5 @@ module.exports = (env) => {
         devServer: {
             contentBase: path.join(__dirname, 'public')
         }
-    };
+    }
 };

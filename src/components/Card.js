@@ -70,9 +70,11 @@ class Card extends React.Component {
     return(
         
         <div className="card">
-            <p>Day {this.props.count}: {`${day}, ${month} ${date}`}</p>
-            <p>{this.props.description}</p>
-            <p>{this.props.max_temp}&deg; / {this.props.min_temp}&deg;</p>
+            <div className="weather-text">
+                <p>{this.props.count === 1 ? 'Today' : `${day}, ${month} ${date}`}</p>
+                <p>{this.props.description}</p>
+                <p>{this.props.max_temp}&deg; / {this.props.min_temp}&deg;</p>
+            </div>
             <img className="weather-img" src={image.source} alt="{image.alt}" />
 
         </div>
