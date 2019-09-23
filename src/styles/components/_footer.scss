@@ -1,0 +1,19 @@
+.footer {
+    clear: both;
+    border-top: 1px solid gainsboro;
+    margin-top: $s-size;
+}
+
+.header__credit {
+    margin: 0;
+}
+
+.text__credit {
+    clear: both;
+    display: block;
+    font-weight: normal;
+    font-size: smaller;
+    margin-top: $s-size;
+    padding-left: $m-size;
+}
+
