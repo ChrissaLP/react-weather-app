@@ -22,17 +22,14 @@ class Card extends React.Component {
         if (this.props.iconCode < 300) {
             image.source = STORM_ICON;
             image.alt = 'thunderstorms';
-
         }
         else if (this.props.iconCode < 600) {
             image.source = RAIN_ICON;
             image.alt = 'rain';
-
         }
         else if (this.props.iconCode < 700) {
             image.source = SNOW_ICON;
             image.alt = 'snow';
-
         }
         else if (this.props.iconCode < 800) {
             image.source = FOG_ICON;
@@ -67,20 +64,21 @@ class Card extends React.Component {
         let day = daysOfWeek[dateInfo.getUTCDay()];
         let month = months[dateInfo.getUTCMonth()];
         let date = dateInfo.getUTCDate();
-    return(
-        
-        <div className="card">
-            <div className="weather-text">
-                <p>{this.props.count === 1 ? 'Today' : `${day}, ${month} ${date}`}</p>
-                <p>{this.props.description}</p>
-                <p>{this.props.max_temp}&deg; / {this.props.min_temp}&deg;</p>
+    
+        return(
+
+            <div className="card">
+                <div className="weather-text">
+                    <p>{this.props.count === 1 ? 'Today' : `${day}, ${month} ${date}`}</p>
+                    <p>{this.props.description}</p>
+                    <p>{this.props.max_temp}&deg; / {this.props.min_temp}&deg;</p>
+                </div>
+                <img className="weather-img" src={image.source} alt="{image.alt}" />
+
             </div>
-            <img className="weather-img" src={image.source} alt="{image.alt}" />
+        );
 
-        </div>
-    );
-
-}
+    }
    
 }
 

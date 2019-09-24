@@ -37,28 +37,27 @@ export default class WeatherApp extends React.Component {
             const error = "Incorrect format. Please enter either a 5 digit zip or city, state.";
             this.setState({ error });
         }
-        
     }
+
     fetchWeatherByZip = (zip, apiKey) => {
         // can see if need the if clause, this checking later
         // need to handle error better
         if (zip) {
             this.setState({ error: '' });
-            fetch('https://api.weatherbit.io/v2.0/forecast/daily?postal_code=' + zip + '&key=' + apiKey).then(
-                (response) => {
+            fetch('https://api.weatherbit.io/v2.0/forecast/daily?units=I&postal_code=' + zip + '&key=' + apiKey)
+            .then((response) => {
                     return response.json();
-
                 }).then((result) => {
-                    // so I remember - stringify turns result into string
-                    // parse turns it into object!
                     const weatherData = JSON.parse(JSON.stringify(result));
                     try {
                         this.setState({ 
                             weatherData: this.parseWeather(weatherData),
                             location: this.parseLocation(weatherData) });
                     }
-                    catch(e) {
-                        console.log(e);
+                    catch(error) {
+                        this.setState({
+                            error
+                        });
                     }
                    
                 });
@@ -70,7 +69,7 @@ export default class WeatherApp extends React.Component {
         // again review if clause format
         if (city) {
             this.setState({ error: ''});
-            fetch('https://api.weatherbit.io/v2.0/forecast/daily?city=' + city + '&country=US&key=' + apiKey).then(
+            fetch('https://api.weatherbit.io/v2.0/forecast/daily?units=I&city=' + city + '&country=US&key=' + apiKey).then(
                 (response) => {
                     if (response.status === 404 || response.status === 200) {
                         console.log(response);
@@ -78,7 +77,7 @@ export default class WeatherApp extends React.Component {
                     }
                     else {  
                         const error = `Error processing your request. Please re-enter data, 
-                                since no weather information found.`
+                                since no weather information found.`;
                         this.setState({
                             error
                         });
@@ -93,8 +92,8 @@ export default class WeatherApp extends React.Component {
                                 error: ''
                             });
                         }
-                        catch (e) {
-                            this.setState({ error: e });
+                        catch (error) {
+                            this.setState({ error });
                         }
                     }
                    
@@ -129,13 +128,10 @@ export default class WeatherApp extends React.Component {
         return location;
     }
     parseWeather = (data) => {
-        // to see structure of data
-        console.log(data);
         // data.data contains an array of weather forecast information by day
         if (!data || !data.data) {
             return [];
         }
-        
         let weatherData = data.data;
         let parsedData = [];
         // starting with 7 days of data
@@ -143,9 +139,8 @@ export default class WeatherApp extends React.Component {
             let datapoint = weatherData[i];
             parsedData.push({
                 date: datapoint.valid_date,
-                temp: datapoint.temp,                                   // can I remove this?
-                min_temp: Math.round(datapoint.min_temp * (9/5) + 32),
-                max_temp: Math.round(datapoint.max_temp * (9/5) + 32),
+                min_temp: Math.round(datapoint.min_temp),
+                max_temp: Math.round(datapoint.max_temp),
                 description: datapoint.weather.description,
                 iconCode: datapoint.weather.code, 
             });
