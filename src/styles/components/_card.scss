@@ -1,3 +1,9 @@
+.card--container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
 .card {
     background: #F0FFFF;
     height: 200px;
@@ -5,7 +11,52 @@
     padding: 0;
     border: 1px solid #B0C4DE;
     border-radius: 5px;
-    float: left;
-    display: block;
     margin: 10px 0px 0px 10px;
+    display: flex;
+    flex-flow: column wrap;
+   
 }
+
+.weather-img {
+     width: 50%;
+}
+
+.weather-info {
+    text-align: center;
+}
+
+/* this is mobile -only but want to switch so other way */
+@media (max-width: 480px) {
+  .card--container {
+      flex-flow: column nowrap;
+  }
+  .card {
+      display: block;
+        width: 90%;
+        height: 90px;
+  }
+  .weather-info {
+      display: flex;
+      flex-flow: row;
+      font-size: $m-size;
+      align-items: center;
+  }
+  .weather-date {
+      flex-basis: 10%;
+  }
+
+  .weather-description {
+      flex-basis: 40%;
+  }
+
+  .weather-temp {
+      flex-basis: 20%;
+  }
+
+  .weather-img {
+      flex-basis: 30%;
+  }
+      
+}
+
+  

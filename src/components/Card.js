@@ -68,13 +68,12 @@ class Card extends React.Component {
         return(
 
             <div className="card">
-                <div className="weather-text">
-                    <p>{this.props.count === 1 ? 'Today' : `${day}, ${month} ${date}`}</p>
-                    <p>{this.props.description}</p>
-                    <p>{this.props.max_temp}&deg; / {this.props.min_temp}&deg;</p>
+                <div className="weather-info">
+                    <p className="weather-date">{this.props.count === 1 ? 'Today' : `${day}, ${month} ${date}`}</p>
+                    <p className="weather-description">{this.props.description}</p>
+                    <p className="weather-temp">{this.props.max_temp}&deg; / {this.props.min_temp}&deg;</p>
+                    <img className="weather-img" src={image.source} alt="{image.alt}" />
                 </div>
-                <img className="weather-img" src={image.source} alt="{image.alt}" />
-
             </div>
         );
 

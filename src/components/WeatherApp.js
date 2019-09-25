@@ -160,21 +160,24 @@ export default class WeatherApp extends React.Component {
                 </h3>
                 <h3>{!this.state.location.state && <span>{this.state.location.country}</span>}</h3>
                 { this.state.error && <p>{this.state.error}</p>}
+                <div className="card--container">
             {
-                
+                   
                 this.state.weatherData.map((data, index) => (
-                <Card 
-                    date={data.date}
-                    key = {index} 
-                    count = {index+1}
-                    iconCode={data.iconCode}
-                    description={data.description}
-                    min_temp={data.min_temp}
-                    max_temp={data.max_temp}
-                />
+                
+                    <Card 
+                        date={data.date}
+                        key = {index} 
+                        count = {index+1}
+                        iconCode={data.iconCode}
+                        description={data.description}
+                        min_temp={data.min_temp}
+                        max_temp={data.max_temp}
+                    />
                 ))
                     
             }
+                </div>
             <div className="form__container">
                 <form className="form__complete" onSubmit={this.handleSubmit}>
                         <legend>Search by zip or by city, state:</legend>
