@@ -25,7 +25,6 @@
     text-align: center;
 }
 
-/* this is mobile -only but want to switch so other way */
 @media (max-width: 480px) {
   .card--container {
       flex-flow: column nowrap;
