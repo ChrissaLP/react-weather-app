@@ -33,4 +33,4 @@ TO DO
 This app was *not* built with `create-react-app`, and I am currently working on updating some of the dependencies. More changes to come.
 
 # License
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](/LICENSE)
