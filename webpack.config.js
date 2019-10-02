@@ -1,19 +1,28 @@
-//entry -> output
 const path = require('path');
-const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-module.exports = () => {
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+// once add testing, add .env.test for testing and change to if-else if
+if (process.env.NODE_ENV === 'development') {
+    require('dotenv').config({ path: '.env' });
+}
+
+module.exports = (env) => {
     const CSSExtract = new ExtractTextPlugin('styles.css');
+    const isProduction = env === 'production';
 
     return { 
         entry: './src/app.js',
         output: {
-            path: path.join(__dirname, 'public'),
+            path: path.join(__dirname, 'public', 'dist'),
             filename: 'bundle.js'
         },
         plugins: [
-            new Dotenv(), 
+            new webpack.DefinePlugin({
+                'process.env.API_KEY': JSON.stringify(process.env.API_KEY)
+            }),
             CSSExtract
         ],
         module: {
@@ -46,14 +55,17 @@ module.exports = () => {
                 use: [
                     {
                         loader: 'file-loader',
-                        options: {},
+                        options: {
+                            name: 'images/[name].[ext]'
+                        },
                     }
                 ]
             }]
         },
-        devtool: 'inline-source-map',
+        devtool: isProduction ? 'source-map' : 'inline-source-map',
         devServer: {
-            contentBase: path.join(__dirname, 'public')
+            contentBase: path.join(__dirname, 'public'),
+            publicPath: '/dist/',
         }
     }
 };
