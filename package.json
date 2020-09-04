@@ -24,7 +24,7 @@
     "express": "4.15.4",
     "extract-text-webpack-plugin": "3.0.0",
     "file-loader": "^4.0.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "normalize.css": "7.0.0",
     "react": "^16.2.0",
     "react-dom": "16.2.1",
